@@ -1,4 +1,4 @@
-# Testing Workshop
+# Testing Workshop (forked and branched from upstream for Larry's learning)
 
 👋 hi there! My name is [Kent C. Dodds](https://kentcdodds.com)! This is a
 workshop repo to teach you about testing JavaScript applications.
