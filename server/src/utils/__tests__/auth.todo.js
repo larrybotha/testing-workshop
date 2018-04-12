@@ -1,5 +1,15 @@
+import {isPasswordAllowed} from '../auth'
+
 test('isPasswordAllowed only allows some passwords', () => {
-  // here's where I'll demo things for you :)
+  const tooShort = '1a2b3c'
+  const alphaOnly = 'asdasd'
+  const numbericOnly = '123456'
+  const justRight = '1a2b3c4'
+
+  expect(isPasswordAllowed(tooShort)).toBe(false)
+  expect(isPasswordAllowed(alphaOnly)).toBe(false)
+  expect(isPasswordAllowed(numbericOnly)).toBe(false)
+  expect(isPasswordAllowed(justRight)).toBe(true)
 })
 
 test('userToJSON excludes secure properties', () => {
