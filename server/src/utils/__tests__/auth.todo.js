@@ -1,4 +1,4 @@
-import {isPasswordAllowed} from '../auth'
+import {isPasswordAllowed, userToJSON} from '../auth'
 
 test('isPasswordAllowed only allows some passwords', () => {
   const disallowedPasswords = ['1a2b3c', 'asdasd', '123456']
@@ -10,25 +10,28 @@ test('isPasswordAllowed only allows some passwords', () => {
 })
 
 test('userToJSON excludes secure properties', () => {
-  // Here you'll need to create a test user object
-  // pass that to the userToJSON function
-  // and then assert that the test user object
-  // doesn't have any of the properties it's not
-  // supposed to.
-  // Here's an example of a user object:
-  // const user = {
-  //   id: 'some-id',
-  //   username: 'sarah',
-  //   // ↑ above are properties which should
-  //   // be present in the returned object
-  //
-  //   // ↓ below are properties which shouldn't
-  //   // be present in the returned object
-  //   exp: new Date(),
-  //   iat: new Date(),
-  //   hash: 'some really long string',
-  //   salt: 'some shorter string',
-  // }
+  const user = {
+    id: 'some-id',
+    username: 'sarah',
+    exp: new Date(),
+    iat: new Date(),
+    hash: 'some really long string',
+    salt: 'some shorter string',
+  }
+  // we could run userToJSON on user, and check which props are there, but
+  // then we're testing the implementation.
+  // Instead, what we expect is for our user to be returned as below, so we
+  // test that the outcome of running userToJSON is aligned with our expectation
+  // Yes, we expect those properties to be removed, but what does that look
+  // like? Don't reimplement the function.
+  const safeUser = {
+    id: user.id,
+    username: user.username,
+  }
+
+  // rather test outcome than re-implement functionality of checking individual
+  // props
+  expect(userToJSON(user)).toEqual(safeUser)
 })
 
 //////// Elaboration & Feedback /////////
@@ -41,7 +44,7 @@ test('userToJSON excludes secure properties', () => {
 http://ws.kcd.im/?ws=Testing&e=auth%20util&em=
 */
 test.skip('I submitted my elaboration and feedback', () => {
-  const submitted = false // change this when you've submitted!
+  const submitted = true // change this when you've submitted!
   expect(submitted).toBe(true)
 })
 ////////////////////////////////
