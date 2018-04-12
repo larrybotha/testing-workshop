@@ -1,6 +1,7 @@
 import {isPasswordAllowed, userToJSON} from '../auth'
 
 test('isPasswordAllowed only allows some passwords', () => {
+  // we could make this more effective using jsverify
   const disallowedPasswords = ['1a2b3c', 'asdasd', '123456']
   const allowedPasswords = ['1a2b3c4']
 
