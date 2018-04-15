@@ -3,9 +3,8 @@ import * as utils from '../utils'
 
 test('returns winner', () => {
   const originalGetWinner = utils.getWinner
-  // change the getWinner implementation to a function
-  // that keeps track of how often it's called and
-  // the arguments it's called with (Hint #1)
+  // create a mock which tracks the number of times it is called, and the
+  // arguments it is called with each time
   // eslint-disable-next-line import/namespace
   utils.getWinner = (...args) => {
     // track the arguments passed through in this call
@@ -22,12 +21,8 @@ test('returns winner', () => {
 
   const winner = thumbWar('Ken Wheeler', 'Kent C. Dodds')
   expect(winner).toBe('Kent C. Dodds')
-  // add an assertion for how many times the getWinner function
-  // was supposed to be called (2 times) (Hint #2)
   expect(utils.getWinner.mock.calls.length).toBe(2)
-  // add another assertion that every time it was called
-  // it was called with the right arguments: 'Ken Wheeler', 'Kent C. Dodds'
-  // (Hint #3)
+  // assert that our mock is called with the correct arguments
   utils.getWinner.mock.calls.map(args => {
     expect(args).toContain('Kent C. Dodds')
     expect(args).toContain('Ken Wheeler')
