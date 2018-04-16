@@ -5,17 +5,13 @@ test('returns winner', () => {
   const originalGetWinner = utils.getWinner
   // change this to a jest mock function (Hint #1)
   // eslint-disable-next-line import/namespace
-  utils.getWinner = (...args) => {
-    utils.getWinner.mock.calls.push(args)
-    return args[1]
-  }
-  utils.getWinner.mock = {calls: []}
+  utils.getWinner = jest.fn((_, p2) => p2)
 
   const winner = thumbWar('Ken Wheeler', 'Kent C. Dodds')
   expect(winner).toBe('Kent C. Dodds')
   // change this to the built-in jest assertion for how many times a mock
   // function was called (use toHaveBeenCalledTimes) (Hint #2)
-  expect(utils.getWinner.mock.calls).toHaveLength(2)
+  expect(utils.getWinner).toHaveBeenCalledTimes(2)
   utils.getWinner.mock.calls.forEach(args => {
     expect(args).toEqual(['Ken Wheeler', 'Kent C. Dodds'])
   })

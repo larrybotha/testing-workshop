@@ -4,17 +4,22 @@ import * as utils from '../utils'
 test('returns winner', () => {
   // replace the next three lines with a call to jest.spyOn and
   // call to mockImplementation on the mocked function (See hint #1)
-  const originalGetWinner = utils.getWinner
-  // eslint-disable-next-line import/namespace
-  utils.getWinner = (p1, p2) => p2
+
+  // spyOn the utils object's getWinner method
+  const spy = jest.spyOn(utils, 'getWinner')
+  // create a mock implementation of that method
+  utils.getWinner.mockImplementation((_, p2) => p2)
 
   const winner = thumbWar('Ken Wheeler', 'Kent C. Dodds')
   expect(winner).toBe('Kent C. Dodds')
 
   // replace the next two lines with a restoration of the original function
   // (See hint #2)
-  // eslint-disable-next-line import/namespace
-  utils.getWinner = originalGetWinner
+
+  // reset the mock
+  spy.mockReset()
+  // restore the original object
+  spy.mockRestore()
 })
 
 /*
