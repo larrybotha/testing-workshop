@@ -5,11 +5,11 @@ import * as utilsMock from '../utils'
 // will use the one that exists in the
 // __mocks__ directory which I created for you
 // already (you're welcome)
-jest.mock('../utils', () => {
-  return {
-    getWinner: jest.fn((p1, p2) => p2),
-  }
-})
+
+// If a __mocks__ folder with a module of the same name as the module being
+// mocked is provided, we don't need to create an implementation in jest.mock.
+// Jest will automatically use that file if we don't provide an implementation
+jest.mock('../utils')
 
 test('returns winner', () => {
   const winner = thumbWar('Ken Wheeler', 'Kent C. Dodds')

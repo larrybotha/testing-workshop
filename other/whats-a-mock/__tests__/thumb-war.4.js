@@ -9,11 +9,19 @@ import * as utils from '../utils'
 // )
 //
 // (Hint #1)
+jest.mock('../utils', () => {
+  return {
+    getWinner: jest.fn((_, p2) => {
+      return p2
+    }),
+  }
+})
 
 test('returns winner', () => {
-  // remove the next two lines
-  jest.spyOn(utils, 'getWinner')
-  utils.getWinner.mockImplementation((p1, p2) => p2)
+  // No need for these lines if we are defining an inline mock, so we can
+  // comment out these lines:
+  // jest.spyOn(utils, 'getWinner')
+  // utils.getWinner.mockImplementation((p1, p2) => p2)
 
   const winner = thumbWar('Ken Wheeler', 'Kent C. Dodds')
   expect(winner).toBe('Kent C. Dodds')
@@ -22,8 +30,9 @@ test('returns winner', () => {
     expect(args).toEqual(['Ken Wheeler', 'Kent C. Dodds'])
   })
 
-  // remove the next line
-  utils.getWinner.mockRestore()
+  // because our mock is defined outside of the tests, restoring it won't do
+  // anything to the mocked module, so we can remove it
+  // utils.getWinner.mockRestore()
 })
 
 /*
