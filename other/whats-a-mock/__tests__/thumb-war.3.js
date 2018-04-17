@@ -13,6 +13,14 @@ test('returns winner', () => {
   const winner = thumbWar('Ken Wheeler', 'Kent C. Dodds')
   expect(winner).toBe('Kent C. Dodds')
 
+  // test number of times the mock is called
+  expect(utils.getWinner).toHaveBeenCalledTimes(2)
+
+  // test the arguments the mock is called with
+  utils.getWinner.mock.calls.map(call =>
+    expect(call).toEqual(['Ken Wheeler', 'Kent C. Dodds']),
+  )
+
   // replace the next two lines with a restoration of the original function
   // (See hint #2)
 
